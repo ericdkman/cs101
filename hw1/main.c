@@ -12,8 +12,10 @@ int main() {
     int c = 0;
     int times = 0;
 
+    time_t curtime;
+    time(&curtime);
     srand(time(NULL));
-    printf("Enter number 1~5: ");
+    printf("要買幾份樂透\n請輸入1~5: ");
     scanf("%d", &times);
 
     for (int c=0; c < times; c++) {
@@ -44,72 +46,32 @@ int main() {
                 }
             } 
         }
-        if (c==0) {
-            for (int i=0; i<6; i++) {
-                b[i] = a[i];
-            }
-        }
-        if (c==1) {
-            for (int i=0; i<6; i++) {
-                b[i+6] = a[i];
-            }
-        }
-        if (c==2) {
-            for (int i=0; i<6; i++) {
-                b[i+12] = a[i];
-            }
-        }
-        if (c==3) {
-            for (int i=0; i<6; i++) {
-                b[i+18] = a[i];
-            }
-        }
-        if (c==4) {
-            for (int i=0; i<6; i++) {
-                b[i+24] = a[i];
-            }
+
+        for (int i=0; i<6; i++) {
+            b[i+c*6] = a[i];
         }
     }
 
     FILE* fp;
     fp = fopen("lotto.txt", "w+");
-    if (times >= 1) {
-        fprintf(fp,"第一組: ");
-        for (int i=0; i<6; i++) {
-            fprintf(fp,"%d ", b[i]);
+    fprintf(fp,"====== lotto.txt =======\n");
+    for (int i=1; i <= times; i++) {
+        fprintf(fp,"[%d]:",i);
+
+        for (int j = 0 + (i-1)*6; j<(6 + (i-1)*6); j++) {
+            fprintf(fp,"%02d ", b[j]);
         }
-    }
-    
-    if (times >= 2) {
-       fprintf(fp,"\n");
-       fprintf(fp,"第二組: ");
-       for (int i=6; i<12; i++) {
-           fprintf(fp,"%d ", b[i]);
-        } 
-    }
-    if (times >= 3) {
+
         fprintf(fp,"\n");
-        fprintf(fp,"第三組: ");
-        for (int i=12; i<18; i++) {
-            fprintf(fp,"%d ", b[i]);
+    }
+
+    if ((5-times) > 0) {
+        for (int j = times; j <= 5; j++) {
+            fprintf(fp,"[%d]:__ __ __ __ __ __ ",j);
+            fprintf(fp,"\n");
         }
     }
-    
-    if (times >= 4) {
-        fprintf(fp,"\n");
-        fprintf(fp,"第四組: ");
-        for (int i=18; i<24; i++) {
-            fprintf(fp,"%d ", b[i]);
-        }
-    }
-    
-    if (times >= 5) {
-        fprintf(fp,"\n");
-        fprintf(fp,"第五組: ");
-        for (int i=24; i<30; i++) {
-           fprintf(fp,"%d ", b[i]); 
-        }
-    }
-    
+
+    fprintf(fp,"==== csie@B1029015 =====");
     fclose(fp);
 }
