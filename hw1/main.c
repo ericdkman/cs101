@@ -54,7 +54,8 @@ int main() {
 
     FILE* fp;
     fp = fopen("lotto.txt", "w+");
-    fprintf(fp,"====== lotto.txt =======\n");
+    fprintf(fp, "====== lotto.txt =======\n");
+    fprintf(fp, "%s",ctime(&curtime));
     for (int i=1; i <= times; i++) {
         fprintf(fp,"[%d]:",i);
 
