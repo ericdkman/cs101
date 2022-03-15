@@ -1,9 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+
+#define COUNTER_FILE "counter.bin"
+#define MAX_LOTTO_NUM 7
+#define MAX_LOTTO_NUMSET 5
+
+void set_counter(int counter) {
+    int write_array[1];
+    write_array[0] = counter;
+    FILE* tmpfp = fopen(COUNTER_FILE,"wb");
+    fwrite(write_array, sizeof(int), 1, tmpfp);
+    fclose(tmpfp);
+}
+
+void init_file() {
+    int write_array[1] = {0};
+    FILE* fp = fopen(COUNTER_FILE,"r");
+    if (fp == NULL) {
+        FILE* tmpfp = fopen(COUNTER_FILE,"wb+");
+        fwrite(write_array, sizeof(int), 1, tmpfp);
+        fclose(tmpfp);
+    } else {
+        fclose(fp);
+    }
+}
+
+int get_counter() {
+      int read_array[1];
+      FILE* tmpfp = fopen(COUNTER_FILE,"rb");
+      fread(read_array, siz    fwrite(write_array, sizeof(int), 1, tmpfp);
+    fclose(tmpfp);
+}
+      return read_array[0]; 
+}
+
 
 
 int main() {
+    
     char a[6];
     char b[30];
     int num = 0;
@@ -11,6 +47,7 @@ int main() {
     int i = 0;
     int c = 0;
     int times = 0;
+    int array_read[1];
 
     time_t curtime;
     time(&curtime);
@@ -53,8 +90,10 @@ int main() {
     }
 
     FILE* fp;
-    fp = fopen("bin.file","w+");
-    fread 
+    fp = fopen("","wb");
+    fread(array_read, sizeof(int), 1, fp);
+    printf("%d",array_read[1]);
+    fclose(fp);
     fp = fopen("lotto[0001].txt", "w+");
     fprintf(fp, "====== lotto.txt =======\n");
     fprintf(fp, "%s",ctime(&curtime));
