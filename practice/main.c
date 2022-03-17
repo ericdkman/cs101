@@ -13,6 +13,13 @@ void set_counter(int counter) {
     fclose(tmpfp);
 }
 
+void reset_counter() {
+    int write_array[1] = {0};
+    FILE* tmpfp = fopen(COUNTER_FILE,"wb");
+    fwrite(write_array, sizeof(int), 1, tmpfp);
+    fclose(tmpfp);
+}
+
 void init_file() {
     int write_array[1] = {0};
     FILE* fp = fopen(COUNTER_FILE,"r");
@@ -26,12 +33,14 @@ void init_file() {
 }
 
 int get_counter() {
-      int read_array[1];
-      FILE* tmpfp = fopen(COUNTER_FILE,"rb");
-      fread(read_array, sizeof(int), 1, tmpfp);
-      fclose(tmpfp);
-      return read_array[0]; 
+    int read_array[1];
+    FILE* tmpfp = fopen(COUNTER_FILE,"rb");
+    fread(read_array, sizeof(int), 1, tmpfp);
+    fclose(tmpfp);
+    return read_array[0]; 
 }
+
+
 
 int main() {
     char a[6];
@@ -43,7 +52,7 @@ int main() {
     int c = 0;
     int goods = 0;
     int times = 0;
-    int counter;
+    int counter = 0;
 
     
     printf("要買幾份樂透\n請輸入1~5: ");
@@ -106,7 +115,7 @@ int main() {
         }
         
         if ((5-times) > 0) {
-            for (int j = times; j <= 5; j++) {
+            for (int j = times+1; j <= 5; ++j) {
                 fprintf(fp,"[%d]:__ __ __ __ __ __ ",j);
                 fprintf(fp,"\n");
             }
@@ -116,4 +125,5 @@ int main() {
         set_counter(counter);
         return 0;
     }
+    reset_counter();
 }
