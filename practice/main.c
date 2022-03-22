@@ -15,7 +15,7 @@ void set_counter(int counter) {
 
 void reset_counter() {
     int write_array[1] = {0};
-    FILE* tmpfp = fopen(COUNTER_FILE,"wb");
+    FILE* tmpfp = fopen(COUNTER_FILE,"w+");
     fwrite(write_array, sizeof(int), 1, tmpfp);
     fclose(tmpfp);
 }
@@ -123,7 +123,6 @@ int main() {
         fprintf(fp,"==== csie@B1029015 =====");
         fclose(fp);
         set_counter(counter);
-        return 0;
     }
     reset_counter();
 }

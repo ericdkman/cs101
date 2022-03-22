@@ -109,19 +109,22 @@ int main() {
     lotto_recoed_t emp_i;
     int counter;
     int sell;
-    char id;
+    char szbuff[32];
+    char id[6];
     init_file();
     counter = get_counter();
     do_lotto_main(++counter);
     set_counter(counter);
 
+    time_t now = time(0);
+    strftime (szbuff, 100, "%Y%m%d-%H:%M:%S", localtime(&now));
+    printf ("%s\n", szbuff);
     sell = counter*50*1.1;
-    scanf("%s", id);
-
-    strcpy(emp_i.receipt,"%s");
-    strcpy(emp_i.ID,"%s");
-    strcpy(emp_i.date,"%s");
-    strcpy(emp_i.time,"%s");
+    scanf("%s", &id);
+    strcpy(emp_i.receipt,"%s",);
+    strcpy(emp_i.ID,"%s",);
+    strcpy(emp_i.date,"%s",);
+    strcpy(emp_i.time,"%s", szbuff);
 
     return 0;
 }

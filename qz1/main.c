@@ -32,8 +32,7 @@ int get_counter() {
       FILE* tmpfp = fopen(COUNTER_FILE,"rb");
       fread(read_array, siz    fwrite(write_array, sizeof(int), 1, tmpfp);
     fclose(tmpfp);
-}
-      return read_array[0]; 
+      return read_array[0];
 }
 
 
