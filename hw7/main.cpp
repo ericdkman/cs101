@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 class MMmanger {
@@ -14,6 +15,11 @@ class MMmanger {
 		    	calloced_p[i] = 0;
 		    }
 			g_mm = (int*)malloc(num_of_space * sizeof(int));
+		}
+
+		~MMmanger() {
+			free(calloced_p);
+			free(g_mm);
 		}
 
 		int get_MMCapacity() {
